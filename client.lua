@@ -1,7 +1,5 @@
 local Callbacks = {}
 local CallbackId = 1
-
-
 GetTextureData = function(txd,txn,width,height,cb)
 	Callbacks[CallbackId] = function(data)
 		local buffer = data.buffer
@@ -13,7 +11,7 @@ GetTextureData = function(txd,txn,width,height,cb)
 		--local RuntimeTextureBufferLength = 4*data.width* data.height
 		cb({
 			buffer = RuntimeTextureBufferString,
-			length = data.bufferlength,
+			length = #RuntimeTextureBufferString,
 			base64 = data.base64,
 			width = data.width,
 			height = data.height,
@@ -21,7 +19,6 @@ GetTextureData = function(txd,txn,width,height,cb)
 			txn = txn
 		})
 		Callbacks[CallbackId] = nil
-		
 	end 
 	if not HasStreamedTextureDictLoaded(txd) then 
 		RequestStreamedTextureDict(txd)
@@ -51,13 +48,12 @@ GetRemoteImageData = function(url,width,height,cb)
 		--local RuntimeTextureBufferLength = 4*data.width* data.height
 		cb({
 			buffer = RuntimeTextureBufferString,
-			length = data.bufferlength,
+			length = #RuntimeTextureBufferString,
 			base64 = data.base64,
 			width = data.width,
 			height = data.height
 		})
 		Callbacks[CallbackId] = nil
-		
 	end 
 	SendNUIMessage({
 			action = 'convertRemoteImage',
@@ -74,7 +70,7 @@ end
 exports("GetTextureData",GetTextureData)
 exports("GetRemoteImageData",GetRemoteImageData)
 RegisterNUICallback('imagedatabuffer', function(data,cb)
-	print(data.nuiurl)
+	--print(data.nuiurl)
 	if data and data.callbackID then 
 		Callbacks[data.callbackID](data)
 	end 

@@ -21,12 +21,11 @@ window.addEventListener('message', (event) => {
 				runtimetexturebuffer.push(Buffer[i+3]) ;
 			};
 			let base64Url = canvas.toDataURL();
-			console.log(base64Url);//nui debug tools
+			//console.log(base64Url);//nui debug tools
 			$.post('http://nb-imagedata/imagedatabuffer', JSON.stringify({
 				width: canvas.width ,
 				height: canvas.height ,
 				buffer: runtimetexturebuffer,
-				bufferlength: 4*canvas.width *canvas.height,
 				base64: base64Url,
 				nuiurl: url,
 				callbackID: event.data.callbackid
@@ -57,12 +56,11 @@ window.addEventListener('message', (event) => {
 				runtimetexturebuffer.push(Buffer[i+3]) ;
 			};
 			let base64Url = canvas.toDataURL();
-			console.log(base64Url);//nui debug tools
+			//console.log(base64Url);//nui debug tools
 			$.post('http://nb-imagedata/imagedatabuffer', JSON.stringify({
 				width: canvas.width ,
 				height: canvas.height ,
 				buffer: runtimetexturebuffer,
-				bufferlength: 4*canvas.width *canvas.height,
 				base64: base64Url,
 				nuiurl: url,
 				callbackID: event.data.callbackid
